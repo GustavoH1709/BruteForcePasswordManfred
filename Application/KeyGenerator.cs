@@ -1,4 +1,6 @@
-﻿namespace BruteForcePasswordManfred.Application
+﻿using BruteForcePasswordManfred.DTO;
+
+namespace BruteForcePasswordManfred.Application
 {
     public class KeyGenerator(string exePath)
     {
@@ -6,29 +8,33 @@
         private readonly int _length = 6;
 
         private readonly KeyBreaker _kb = new(exePath);
-        private bool _keyFound;
 
-        public void Run()
+        private bool found;
+        private string key;
+
+        public KeyGeneratorDTO Run()
         {
             Console.WriteLine("Brute force recursivo iniciado...");
             GeneratePasswordsRecursive(chars, _length, "");
+            KeyGeneratorDTO resultado = new(found, key);
+            return resultado;
         }
 
         private void GeneratePasswordsRecursive(string chars, int length, string current)
         {
             if (length == 0)
             {
-                _keyFound = _kb.TryBruteForce(current);
+                found = _kb.TryBruteForce(current);
             }
             else
             {
                 foreach (char c in chars)
                 {
-                    if (_keyFound)
+                    if (found)
                     {
                         if (current.Length == _length)
                         {
-                            Console.WriteLine($"A senha é '{current}'");
+                            key = current;
                         }
 
                         break;
