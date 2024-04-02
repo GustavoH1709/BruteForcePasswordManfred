@@ -7,6 +7,7 @@
 
         private readonly KeyBreaker _kb = new(exePath);
         private bool _keyFound;
+        private string key;
 
         public void Run()
         {
@@ -19,6 +20,11 @@
             if (length == 0)
             {
                 _keyFound = _kb.TryBruteForce(current);
+
+                if (_keyFound)
+                {
+                    Console.WriteLine($"A senha é '{current}'");
+                }
             }
             else
             {
@@ -26,11 +32,6 @@
                 {
                     if (_keyFound)
                     {
-                        if (current.Length == _length)
-                        {
-                            Console.WriteLine($"A senha é '{current}'");
-                        }
-
                         break;
                     }
 
