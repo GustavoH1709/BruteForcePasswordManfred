@@ -1,5 +1,4 @@
 ﻿using BruteForcePasswordManfred.Application;
-using BruteForcePasswordManfred.DTO;
 
 namespace BruteForcePasswordManfred
 {
@@ -15,16 +14,7 @@ namespace BruteForcePasswordManfred
             string exePath = args.First();
 
             KeyGenerator keyGenerator = new(exePath);
-            KeyGeneratorDTO resultado = keyGenerator.Run();
-
-            if (resultado.HasFound)
-            {
-                Console.WriteLine($"Senha é '{resultado.Key}'");
-            }
-            else
-            {
-                Console.WriteLine($"Senha não encontrada");
-            }
+            keyGenerator.Run();
 
             Console.WriteLine("Execução do programa terminou");
         }
