@@ -12,16 +12,21 @@ namespace BruteForcePasswordManfred.Application
             _executablePath = executablePath;
             _process = new();
             _process.StartInfo.FileName = _executablePath;
-
         }
 
         public bool TryBruteForce(string key)
         {
-            //_process.StartInfo.Arguments = key;
-            //_process.Start();
-            //_process.WaitForExit();
+            Console.WriteLine($"Tentativa atual: {key}");
 
-            return false;
+            _process.StartInfo.Arguments = $"administrador {key}";
+            _process.StartInfo.UseShellExecute = false;
+            _process.StartInfo.RedirectStandardOutput = true;
+            _process.Start();
+            _process.WaitForExit();
+
+            string output = _process.StandardOutput.ReadToEnd();
+
+            return output.Contains("acesso concedido");
         }
     }
 }

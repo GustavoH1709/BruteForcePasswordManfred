@@ -9,8 +9,11 @@
         private bool _keyFound;
         private string key;
 
+        private FileSaver _fileSaver;
+
         public void Run()
         {
+            _fileSaver = new FileSaver();
             Console.WriteLine("Brute force recursivo iniciado...");
             GeneratePasswordsRecursive(chars, _length, "");
         }
@@ -24,6 +27,7 @@
                 if (_keyFound)
                 {
                     Console.WriteLine($"A senha é '{current}'");
+                    _fileSaver.CriaArquivoComSenha(current);
                 }
             }
             else

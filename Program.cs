@@ -15,8 +15,8 @@ namespace BruteForcePasswordManfred
 
             KeyGenerator keyGenerator = new(exePath);
             keyGenerator.Run();
-
             Console.WriteLine("Execução do programa terminou");
+            Console.ReadLine();
         }
     }
 }
